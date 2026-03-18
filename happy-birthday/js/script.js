@@ -28,6 +28,9 @@ $(document).ready(function() {
     });
 
     $('#next-page').click(function () {
+        if (window.persistBirthdayMusic) {
+            window.persistBirthdayMusic();
+        }
         setTimeout(function () {
             window.location.href = '../happy birthday 2/indexx.html';
         }, 120);

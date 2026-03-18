@@ -92,6 +92,9 @@
         setInterval(persistTime, 250);
         window.addEventListener('beforeunload', persistTime);
 
+        // Expose for page scripts before navigation.
+        window.persistBirthdayMusic = persistTime;
+
         function attemptPlay() {
             audio.muted = false;
             audio.volume = 1;

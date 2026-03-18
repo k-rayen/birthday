@@ -84,6 +84,9 @@ window.addEventListener('load', () => {
 
         // Smooth page transition on click
         button.addEventListener('click', () => {
+            if (window.persistBirthdayMusic) {
+                window.persistBirthdayMusic();
+            }
             gsap.to('body', {
                 opacity: 0,
                 duration: 1,
