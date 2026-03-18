@@ -1,6 +1,19 @@
 (function () {
     var MUSIC_KEY = 'birthdayMusicCurrentTime';
-    var MUSIC_SRC = '/happy-birthday/music.mp3';
+
+    function resolveMusicSrc() {
+        // Build a stable URL from where shared-music.js is actually served.
+        // Works for both local server (/) and GitHub Pages (/repo-name/).
+        var script = document.currentScript;
+        if (script && script.src) {
+            var scriptUrl = new URL(script.src, window.location.href);
+            var basePath = scriptUrl.pathname.replace(/\/shared-music\.js$/, '/');
+            return scriptUrl.origin + basePath + 'happy-birthday/music.mp3';
+        }
+
+        // Fallback for older browser behavior.
+        return new URL('happy-birthday/music.mp3', window.location.origin + '/').toString();
+    }
 
     function initSharedMusic() {
         var audio = document.getElementById('global-music');
@@ -8,7 +21,7 @@
         if (!audio) {
             audio = document.createElement('audio');
             audio.id = 'global-music';
-            audio.src = MUSIC_SRC;
+            audio.src = resolveMusicSrc();
             audio.loop = true;
             audio.preload = 'auto';
             audio.autoplay = true;
