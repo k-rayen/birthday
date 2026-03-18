@@ -16,6 +16,9 @@ $(document).ready(function() {
     $(".main").hide();
     
     $('#play').click(function () {
+        if (window.startBirthdayMusic) {
+            window.startBirthdayMusic();
+        }
         $(".loader").fadeOut(1500);
         $(".main").fadeIn("slow");
         sf.destroy();
@@ -25,9 +28,6 @@ $(document).ready(function() {
     });
 
     $('#next-page').click(function () {
-        if (window.startBirthdayMusic) {
-            window.startBirthdayMusic();
-        }
         setTimeout(function () {
             window.location.href = '../happy birthday 2/indexx.html';
         }, 120);
