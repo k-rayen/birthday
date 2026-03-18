@@ -1,6 +1,18 @@
 (function () {
     var MUSIC_KEY = 'birthdayMusicCurrentTime';
 
+    function getBasePath() {
+        var pathParts = window.location.pathname.split('/').filter(Boolean);
+
+        // GitHub Pages project site: /<repo>/...
+        if (window.location.hostname.endsWith('github.io') && pathParts.length > 0) {
+            return '/' + pathParts[0] + '/';
+        }
+
+        // Local server or custom host.
+        return '/';
+    }
+
     function createPlayButton(audio) {
         if (document.getElementById('global-music-play-btn')) {
             return;
@@ -34,17 +46,27 @@
     }
 
     function resolveMusicSrc() {
-        // Build a stable URL from where shared-music.js is actually served.
-        // Works for both local server (/) and GitHub Pages (/repo-name/).
-        var script = document.currentScript;
-        if (script && script.src) {
-            var scriptUrl = new URL(script.src, window.location.href);
-            var basePath = scriptUrl.pathname.replace(/\/shared-music\.js$/, '/');
-            return scriptUrl.origin + basePath + 'happy-birthday/music.mp3';
+        return new URL(getBasePath() + 'happy-birthday/music.mp3', window.location.origin).toString();
+    }
+
+    function showMusicError() {
+        if (document.getElementById('global-music-error')) {
+            return;
         }
 
-        // Fallback for older browser behavior.
-        return new URL('happy-birthday/music.mp3', window.location.origin + '/').toString();
+        var error = document.createElement('div');
+        error.id = 'global-music-error';
+        error.textContent = 'Music error: file cannot be played on this browser.';
+        error.style.position = 'fixed';
+        error.style.left = '16px';
+        error.style.bottom = '16px';
+        error.style.zIndex = '2147483647';
+        error.style.padding = '10px 14px';
+        error.style.borderRadius = '10px';
+        error.style.background = 'rgba(0, 0, 0, 0.75)';
+        error.style.color = '#fff';
+        error.style.fontSize = '13px';
+        document.body.appendChild(error);
     }
 
     function initSharedMusic() {
@@ -60,6 +82,10 @@
             audio.style.display = 'none';
             document.body.appendChild(audio);
         }
+
+        audio.addEventListener('error', function () {
+            showMusicError();
+        });
 
         var savedTime = parseFloat(localStorage.getItem(MUSIC_KEY));
         if (!Number.isNaN(savedTime) && savedTime >= 0) {
@@ -85,6 +111,8 @@
 
         function tryResume() {
             if (audio.paused) {
+                audio.muted = false;
+                audio.volume = 1;
                 audio.play().catch(function () {
                     createPlayButton(audio);
                 });
