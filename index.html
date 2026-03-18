@@ -2,12 +2,80 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta http-equiv="refresh" content="0; url=./happy-birthday/index.html">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Happy Birthday</title>
+    <link rel="stylesheet" href="mono.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
 </head>
 <body>
-    <p>Redirecting to the birthday demo...</p>
-    <p>If you are not redirected, <a href="./happy-birthday/index.html">click here</a>.</p>
+    <audio id="bg-music" preload="auto" loop>
+        <source src="./happy-birthday/music.mp3" type="audio/mpeg">
+    </audio>
+
+    <div class="loader" id="loader">
+        <button id="play" class="cta-button">Start</button>
+    </div>
+
+    <main class="app is-hidden" id="app">
+        <section id="step-intro" class="step is-active">
+            <div class="container center">
+                <img src="./happy-birthday/img/banner.png" alt="Banner" class="banner">
+                <h1>Happy Birthday <i>Emounti</i></h1>
+                <div id="typed-greeting" class="greeting"></div>
+                <img src="./happy-birthday/img/cake.gif" alt="Cake" class="cake">
+                <button id="next-page" class="cta-button">Click to Enter Our World 💕</button>
+            </div>
+        </section>
+
+        <section id="step-wish" class="step">
+            <div class="container center">
+                <h2>Happy Birthday Emna</h2>
+                <p class="subtitle">Hey You Know What! You're the most adorable human i ever met! 💖</p>
+                <button id="to-reasons" class="cta-button">Click here💕</button>
+            </div>
+        </section>
+
+        <section id="step-reasons" class="step">
+            <div class="container center">
+                <h2>Why You're My Best Friend! 💖</h2>
+                <div id="reasons-container"></div>
+                <button id="reason-btn" class="cta-button">enter here... 💕</button>
+                <div id="reason-counter" class="counter"></div>
+            </div>
+        </section>
+
+        <section id="step-memories" class="step">
+            <div class="container">
+                <h2 class="center">Our Beautiful Moments Together</h2>
+                <p class="subtitle center">Every moment spent with you has been magical. Let's cherish these precious memories ...</p>
+
+                <div class="memory-grid">
+                    <article class="memory-card">
+                        <img src="./happy birthday 2/d1.jpg" alt="Memory 1">
+                        <h3>Her Smile Says It All</h3>
+                        <p>You’re truly one of the sweetest girls I know, and I feel lucky to have a sis like you.</p>
+                    </article>
+                    <article class="memory-card">
+                        <img src="./happy birthday 2/d2.jpg" alt="Memory 2">
+                        <h3>Together Vibes</h3>
+                        <p>May your journey ahead be filled with happiness, success, and endless smiles.</p>
+                    </article>
+                    <article class="memory-card">
+                        <img src="./happy birthday 2/d3.jpg" alt="Memory 3">
+                        <h3>Pretty Soul</h3>
+                        <p>Keep being the amazing person you are - you make every moment brighter.</p>
+                    </article>
+                </div>
+
+                <section class="final-message">
+                    <h3>Thank You for the Memories</h3>
+                    <p>Every laugh, every chat, and every moment we've shared has been truly special.</p>
+                    <p>You deserve all the joy in the world - keep shining and spreading your beautiful energy.</p>
+                </section>
+            </div>
+        </section>
+    </main>
+
+    <script src="mono.js"></script>
 </body>
 </html>
