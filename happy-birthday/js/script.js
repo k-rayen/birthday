@@ -25,7 +25,12 @@ $(document).ready(function() {
     });
 
     $('#next-page').click(function () {
-        window.location.href = '../happy birthday 2/indexx.html';
+        if (window.startBirthdayMusic) {
+            window.startBirthdayMusic();
+        }
+        setTimeout(function () {
+            window.location.href = '../happy birthday 2/indexx.html';
+        }, 120);
     });
     
     var typed = new Typed("#typed", {

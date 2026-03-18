@@ -1,6 +1,7 @@
 (function () {
     var MUSIC_TIME_KEY = 'birthdayMusicCurrentTime';
     var MUSIC_STAMP_KEY = 'birthdayMusicTimestamp';
+    var MUSIC_ENABLED_KEY = 'birthdayMusicEnabled';
 
     function getBasePath() {
         var pathParts = window.location.pathname.split('/').filter(Boolean);
@@ -98,6 +99,7 @@
             var p = audio.play();
             if (p && typeof p.then === 'function') {
                 p.then(function () {
+                    localStorage.setItem(MUSIC_ENABLED_KEY, '1');
                     persistTime();
                 }).catch(function () {
                     // Browser policy may still wait for user interaction.
@@ -105,10 +107,16 @@
             }
         }
 
-        attemptPlay();
-        document.addEventListener('click', attemptPlay, { passive: true });
-        document.addEventListener('touchstart', attemptPlay, { passive: true });
-        document.addEventListener('keydown', attemptPlay);
+        // Public function used by the CTA click to start music explicitly.
+        window.startBirthdayMusic = function () {
+            localStorage.setItem(MUSIC_ENABLED_KEY, '1');
+            attemptPlay();
+        };
+
+        // Continue automatically on next pages after first explicit start.
+        if (localStorage.getItem(MUSIC_ENABLED_KEY) === '1') {
+            attemptPlay();
+        }
     }
 
     if (document.readyState === 'loading') {
