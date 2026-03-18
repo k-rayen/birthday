@@ -84,6 +84,9 @@ window.addEventListener('load', () => {
 
         // Smooth page transition on click
         button.addEventListener('click', () => {
+            if (window.startBirthdayMusic) {
+                window.startBirthdayMusic();
+            }
             if (window.persistBirthdayMusic) {
                 window.persistBirthdayMusic();
             }

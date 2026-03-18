@@ -74,6 +74,9 @@ function displayNewReason() {
                     shuffleButton.textContent = "Enter Our Storylane 💫";
                     shuffleButton.classList.add('story-mode');
                     shuffleButton.addEventListener('click', () => {
+                        if (window.startBirthdayMusic) {
+                            window.startBirthdayMusic();
+                        }
                         if (window.persistBirthdayMusic) {
                             window.persistBirthdayMusic();
                         }
