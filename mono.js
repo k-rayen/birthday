@@ -7,6 +7,8 @@
     var reasonBtn = document.getElementById('reason-btn');
     var reasonCounter = document.getElementById('reason-counter');
     var reasonsContainer = document.getElementById('reasons-container');
+    var goodbyeBtn = document.querySelector('.goodbye-btn');
+    var customCursor = document.querySelector('.custom-cursor');
 
     var reasons = [
         { text: "You're such a kind and wonderful person, and I feel lucky to share such a good bond with you.", emoji: "🌟" },
@@ -25,6 +27,11 @@
         if (next) {
             next.classList.add('is-active');
             next.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+        
+        // Trigger confetti when reaching memories
+        if (stepId === 'step-memories') {
+            triggerConfetti();
         }
     }
 
@@ -58,6 +65,31 @@
         }
     }
 
+    function triggerConfetti() {
+        if (typeof confetti !== 'undefined') {
+            confetti({
+                particleCount: 100,
+                spread: 70,
+                origin: { y: 0.6 }
+            });
+            setTimeout(function () {
+                confetti({
+                    particleCount: 50,
+                    spread: 100,
+                    origin: { y: 0.6 }
+                });
+            }, 300);
+        }
+    }
+
+    // Track mouse for custom cursor
+    if (customCursor) {
+        document.addEventListener('mousemove', function (e) {
+            customCursor.style.left = (e.clientX - 15) + 'px';
+            customCursor.style.top = (e.clientY - 15) + 'px';
+        });
+    }
+
     document.getElementById('play').addEventListener('click', function () {
         startMusic();
         loader.classList.add('is-hidden');
@@ -86,4 +118,11 @@
         }
         showStep('step-memories');
     });
+
+    if (goodbyeBtn) {
+        goodbyeBtn.addEventListener('click', function () {
+            triggerConfetti();
+            alert('Thank you for celebrating with me! 💖');
+        });
+    }
 })();
