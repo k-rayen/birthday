@@ -120,6 +120,22 @@
         if (localStorage.getItem(MUSIC_ENABLED_KEY) === '1') {
             attemptPlay();
         }
+
+        function resumeIfEnabled() {
+            if (localStorage.getItem(MUSIC_ENABLED_KEY) === '1') {
+                attemptPlay();
+            }
+        }
+
+        // If autoplay is blocked after a page load, resume on first interaction.
+        document.addEventListener('click', resumeIfEnabled, { passive: true });
+        document.addEventListener('touchstart', resumeIfEnabled, { passive: true });
+        document.addEventListener('keydown', resumeIfEnabled);
+        document.addEventListener('visibilitychange', function () {
+            if (document.visibilityState === 'visible') {
+                resumeIfEnabled();
+            }
+        });
     }
 
     if (document.readyState === 'loading') {
