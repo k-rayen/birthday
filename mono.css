@@ -249,7 +249,7 @@ h2 {
     transform: translateX(100%);
 }
 
-.memory-card img {
+.memory-img {
     width: 100%;
     height: 250px;
     object-fit: cover;
@@ -258,18 +258,18 @@ h2 {
     transition: transform 0.5s ease;
 }
 
-.memory-card:hover img {
+.memory-card:hover .memory-img {
     transform: scale(1.05);
 }
 
-.memory-card h3 {
+.memory-date {
     font-family: 'Dancing Script', cursive;
     color: #ff69b4;
     font-size: 1.3rem;
     margin-bottom: 0.5rem;
 }
 
-.memory-card p {
+.memory-caption {
     font-size: 1rem;
     line-height: 1.5;
     color: #666;
@@ -312,6 +312,14 @@ h2 {
 }
 
 .final-message h3 {
+    font-family: 'Dancing Script', cursive;
+    font-size: 3rem;
+    color: #ff69b4;
+    margin-bottom: 2rem;
+    animation: heartbeat 2s infinite;
+}
+
+.final-message h2 {
     font-family: 'Dancing Script', cursive;
     font-size: 3rem;
     color: #ff69b4;
